@@ -1,5 +1,7 @@
 import stumpy
 
+from dtw_motif import dtw_motif
+
 def DTWMotifDiscovery(TS, subseqlen, maxwarp):
 	"""
 	TODO: Create documentation
@@ -8,14 +10,7 @@ def DTWMotifDiscovery(TS, subseqlen, maxwarp):
 
     lb_t, sp_rates, pr_rate, prrate, best_so_far, motiffirst, motifsec, DTW_time = dtw_motif(TS, subseqlen, maxwarp, mp)
 
-    
-    totalpairs = len(TS)**2; #(len(TS)-2*subseqlen+1)*(len(TS)-2*subseqlen+2)/2
-
-    pruned_pairs = []
-    for i in range(len(lb_t)):
-        pruned_pairs.append((len(TS)-prrate[i])^2) #(len(TS)-prrate[i]-2*subseqlen+1)*(len(TS)-prrate[i]-2*subseqlen+2)/2
-
-	return best_so_far, motiffirst, motifsec
+    return best_so_far, motiffirst, motifsec
 
 
 def mpx_v2(timeSeries, minlag, subseqlen):
@@ -30,10 +25,3 @@ def mpx_v2(timeSeries, minlag, subseqlen):
 	discordsIdx = stump_ret[:, 3]
 
 	return matrixProfile, matrixProfileIdx, motifsIdx, discordsIdx
-
-
-def dtw_motif(TS, subseqlen, maxwarp, mp):
-	"""
-	TODO: Create documentation
-	"""
-	return lb_t, sp_rates, pr_rate, prrate, best_so_far, first_min, sec_min, DTW_time
